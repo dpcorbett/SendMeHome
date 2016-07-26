@@ -1,6 +1,6 @@
 ﻿namespace SendMeHomeService
 {
-    partial class Service1
+    partial class SndHmSvc
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,10 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.ServiceName = "Service1";
+            this.eventLogMain = new System.Diagnostics.EventLog();
+            ((System.ComponentModel.ISupportInitialize)(this.eventLogMain)).BeginInit();
+            // 
+            // SndHmSvc
+            // 
+            this.ServiceName = "SndHmSvc";
+            ((System.ComponentModel.ISupportInitialize)(this.eventLogMain)).EndInit();
+
         }
 
         #endregion
+
+        private System.Diagnostics.EventLog eventLogMain;
     }
 }
