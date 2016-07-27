@@ -43,6 +43,9 @@
     <Reference Include="SharpTools.Log">
       <HintPath>..\..\SharpTools\SharpTools.Log\bin\Debug\SharpTools.Log.dll</HintPath>
     </Reference>
+    <Reference Include="SharpTools.Network">
+      <HintPath>..\..\SharpTools\SharpTools.Network\bin\Debug\SharpTools.Network.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
