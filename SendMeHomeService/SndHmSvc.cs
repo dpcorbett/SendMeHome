@@ -1,4 +1,5 @@
 ﻿using SharpTools.Log;
+using SharpTools.Network;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -54,6 +55,7 @@ namespace SendMeHomeService
         protected override void OnStart(string[] args)
         {
             eventLogMain.WriteEntry("Starting...");
+            _log.Debug("Starting...");
             // Update the service state to Start Pending.
             ServiceStatus serviceStatus = new ServiceStatus();
             serviceStatus.dwCurrentState = ServiceState.SERVICE_START_PENDING;
@@ -69,11 +71,13 @@ namespace SendMeHomeService
         protected override void OnStop()
         {
             eventLogMain.WriteEntry("Stopping...");
+            _log.Debug("Stopping...");
         }
 
         protected override void OnContinue()
         {
             eventLogMain.WriteEntry("Continuing...");
+            _log.Debug("Stopping...");
         }
 
         private void _Pulse()
@@ -87,25 +91,13 @@ namespace SendMeHomeService
 
         public void OnTimer(object sender, System.Timers.ElapsedEventArgs args)
         {
+            string strExtIP = SharpToolsNetwork.GetPublicIP();
             // TODO: Insert monitoring activities here.
             eventLogMain.WriteEntry("Monitoring the System", EventLogEntryType.Information);
-            Console.WriteLine(GetPublicIP());
-            _log.Debug(GetPublicIP());
-            eventLogMain.WriteEntry(GetPublicIP());
+            _log.Debug("Monitoring the System");
+            eventLogMain.WriteEntry(strExtIP);
+            _log.Debug(strExtIP);
         }
 
-        public static string GetPublicIP()
-        {
-            string url = "http://checkip.dyndns.org";
-            System.Net.WebRequest req = System.Net.WebRequest.Create(url);
-            System.Net.WebResponse resp = req.GetResponse();
-            System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-            string response = sr.ReadToEnd().Trim();
-            string[] a = response.Split(':');
-            string a2 = a[1].Substring(1);
-            string[] a3 = a2.Split('<');
-            string a4 = a3[0];
-            return a4;
-        }
     }
 }
